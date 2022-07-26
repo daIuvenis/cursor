@@ -1,31 +1,12 @@
 import java.util.Scanner;
 
-public class Calculator {
-    private static Scanner scanner;
+public class Calculator extends Terminal{
 
     public Calculator() {
         int a = enterFirstNumber();
         String mathOperand = enterMathOperand();
         int b = enterSecondNumber();
         getResult(a, mathOperand, b);
-    }
-
-    private static Integer enterFirstNumber() {
-        System.out.print("Enter the first number: ");
-        scanner = new Scanner(System.in);
-        return scanner.nextInt();
-    }
-
-    private static String enterMathOperand() {
-        System.out.print("Enter the math operand (f.e. +, -, *, /): ");
-        scanner = new Scanner(System.in);
-        return scanner.nextLine();
-    }
-
-    private static Integer enterSecondNumber() {
-        System.out.print("Enter the second number: ");
-        scanner = new Scanner(System.in);
-        return scanner.nextInt();
     }
 
     private static void getResult(int a, String operand, int b) {
@@ -41,7 +22,11 @@ public class Calculator {
                 result = a * b;
                 break;
             case "/":
-                result =  (float)a / b;
+                if (b == 0) {
+                    System.out.println("Cannot divide by zero");
+                } else {
+                    result = (float) a / b;
+                }
                 break;
             default:
                 System.out.println("Incorrect entered math operand");
