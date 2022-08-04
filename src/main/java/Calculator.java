@@ -1,31 +1,28 @@
-import java.util.Scanner;
-
-public class Calculator extends Terminal{
+public class Calculator extends Terminal implements ICalculator {
+    int firstNumber = enterFirstNumber();
+    String mathOperand = enterMathOperand();
+    int secondNumber = enterSecondNumber();
 
     public Calculator() {
-        int a = enterFirstNumber();
-        String mathOperand = enterMathOperand();
-        int b = enterSecondNumber();
-        getResult(a, mathOperand, b);
     }
 
-    private static void getResult(int a, String operand, int b) {
+    public void getResult() {
         float result = 0f;
-        switch (operand) {
+        switch (mathOperand) {
             case "+":
-                result = a + b;
+                result = firstNumber + secondNumber;
                 break;
             case "-":
-                result = a - b;
+                result = firstNumber - secondNumber;
                 break;
             case "*":
-                result = a * b;
+                result = firstNumber * secondNumber;
                 break;
             case "/":
-                if (b == 0) {
+                if (secondNumber == 0) {
                     System.out.println("Cannot divide by zero");
                 } else {
-                    result = (float) a / b;
+                    result = (float) firstNumber / secondNumber;
                 }
                 break;
             default:
