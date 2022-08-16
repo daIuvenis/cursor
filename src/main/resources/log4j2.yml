@@ -1,0 +1,85 @@
+Configuration:
+  Properties:
+    Property:
+      name: logger
+      value: logs
+
+  Appenders:
+
+    #Log in the console
+    Console:
+      - name: Console_Appender
+        PatternLayout:
+          disableAnsi: false
+          Pattern: "%highlight{%-5level}{FATAL=bg_red}  %style{%date{HH:mm:ss.SSS}}{blue} %class{1}:%L - %highlight{%msg} %xEx{short}%n"
+        Filters:
+          ThresholdFilter:
+            level: error
+            onMatch: DENY
+            onMismatch: NEUTRAL
+
+    #Log in the File
+    File:
+      - name: logFile
+        fileName: ${logger}/log_file.log
+        PatternLayout:
+          Pattern: "{%-5level} {%date{yyyy-MM-dd  HH:mm:ss.SSS}} %class{1}:%L - %msg %xEx{short}%n"
+        Filters:
+          ThresholdFilter:
+            level: warn
+            onMatch: DENY
+            onMismatch: NEUTRAL
+
+    #Log file will be overwritten every 100 bytes
+    RollingFile:
+      - name: RollingOverwritten100B
+        fileName: ${logger}/rolling_log_file.log
+        filePattern: ${logger}/rolling_log_file_%i.log
+        PatternLayout:
+          Pattern: "{%-5level} {%date{yyyy-MM-dd  HH:mm:ss.SSS}} %class{1}:%L - %msg %xEx{short}%n"
+        Policies:
+          SizeBasedTriggeringPolicy:
+            size: 100 B
+        DefaultRollOverStrategy:
+          max: 5
+
+      #Log file will be overwritten by time
+      - name: OverwritenByTime
+        fileName: ${logger}/log_time.log
+        filePattern: ${logger}/every_day_log.%d{yyyy-MM-dd-hh-mm}.log
+        PatternLayout:
+          Pattern: "{%-5level} {%date{yyyy-MM-dd  HH:mm:ss.SSS}} %class{1}:%L - %msg %xEx{short}%n"
+        Policies:
+          CronTriggeringPolicy:
+            schedule: "0 0 0 * * ?"
+            evaluateOnStartup: true
+          SizeBasedTriggeringPolicy:
+            size: 10 KB
+
+      #Log file will be overwritten every day
+      - name: EveryDayOverwritten
+        fileName: ${logger}/every_day_log.log
+        filePattern: ${logger}/every_day_log.%d{yyyy-MM-dd}.log.zip
+        PatternLayout:
+          Pattern: "{%-5level} {%date{yyyy-MM-dd  HH:mm:ss.SSS}} %class{1}:%L - %msg %xEx{short}%n"
+        Policies:
+          TimeBasedTriggeringPolicy:
+            interval: 1
+            modulate: true
+
+  Loggers:
+    logger:
+      - name: Main
+        level: all
+        additivity: false
+        AppenderRef:
+          - ref: Console_Appender
+            level: warn
+          - ref: logFile
+            level: info
+          - ref: RollingOverwritten100B
+            level: error
+          - ref: EveryDayOverwritten
+            level: error
+          - ref: OverwritenByTime
+            level: error
