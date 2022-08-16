@@ -1,8 +1,13 @@
-import heplers.MoreNumberException;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 public class Main {
-    public static void main(String[] args) throws MoreNumberException {
-        Calculator calculator = new Calculator();
-        calculator.getResult();
+    private static final Logger LOGGER = LogManager.getLogger(Main.class);
+
+    public static void main(String[] args) {
+        LOGGER.info("Test info");
+        LOGGER.error("error info");
+        LOGGER.warn("warning info");
+        LOGGER.fatal("fatal info");
     }
 }
