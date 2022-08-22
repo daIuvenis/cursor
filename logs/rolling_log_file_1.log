@@ -1,2 +1,0 @@
-{ERROR} {2022-08-19  15:54:06.559} ListUtils:29 - Incorrect option! 
-{ERROR} {2022-08-22  14:48:06.255} Person:33 - java.util.ConcurrentModificationException 
