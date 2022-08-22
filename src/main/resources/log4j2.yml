@@ -68,11 +68,11 @@ Configuration:
             modulate: true
 
   Loggers:
-    logger:
-      - name: Application
+    Root:
         level: all
         additivity: false
         AppenderRef:
+          - ref: Console_Appender
           - ref: logFile
             level: info
           - ref: RollingOverwritten100B
@@ -81,10 +81,3 @@ Configuration:
             level: error
           - ref: OverwritenByTime
             level: error
-
-    Logger:
-      - name: ListUtils
-        additivity: false
-        level: all
-        AppenderRef:
-          - ref: Console_Appender

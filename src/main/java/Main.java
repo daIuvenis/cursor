@@ -5,8 +5,10 @@ public class Main {
     private static final Logger LOGGER = LogManager.getLogger(Main.class);
 
     public static void main(String[] args) {
-       new ListUtils()
-               .collectToArray()
-               .chooseOption();
+//       new ListUtils()
+//               .collectToArray()
+//               .chooseOption();
+        new UtilsSet()
+                .getSortedHashMap();
     }
 }
