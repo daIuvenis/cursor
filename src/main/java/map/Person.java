@@ -25,7 +25,7 @@ public class Person {
         this.keyId = keyId;
     }
 
-    public Person deletePerson(int personKey) {
+    public Account deletePerson(int personKey) {
         personKeys = accountMap.keySet();
         List<Person> toRemove = new ArrayList<>();
         try {
@@ -45,7 +45,7 @@ public class Person {
             LOGGER.error(e);
         }
 
-        return this;
+        return new Account();
     }
 
     @Override
