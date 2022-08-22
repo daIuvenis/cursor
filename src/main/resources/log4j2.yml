@@ -12,11 +12,11 @@ Configuration:
         PatternLayout:
           disableAnsi: false
           Pattern: "%highlight{%-5level}{FATAL=bg_red}  %style{%date{HH:mm:ss.SSS}}{blue} %class{1}:%L - %highlight{%msg} %xEx{short}%n"
-        Filters:
-          ThresholdFilter:
-            level: error
-            onMatch: DENY
-            onMismatch: NEUTRAL
+#        Filters:
+#          ThresholdFilter:
+#            level: error
+#            onMatch: DENY
+#            onMismatch: NEUTRAL
 
     #Log in the File
     File:
@@ -68,13 +68,11 @@ Configuration:
             modulate: true
 
   Loggers:
-    logger:
-      - name: Main
+    Root:
         level: all
         additivity: false
         AppenderRef:
           - ref: Console_Appender
-            level: warn
           - ref: logFile
             level: info
           - ref: RollingOverwritten100B
